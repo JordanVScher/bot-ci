@@ -8,7 +8,7 @@ const { getPoliticianData } = require('./mandatoaberto_api');
 
 const mapPageToAccessToken = async (pageId) => {
   const perfilData = await getPoliticianData(pageId);
-  return perfilData.fb_access_token;
+  return perfilData.fb_access_token ? perfilData.fb_access_token : config.accessToken;
 };
 
 const bot = new MessengerBot({

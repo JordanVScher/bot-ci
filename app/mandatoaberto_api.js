@@ -1,29 +1,31 @@
 /* eslint camelcase: 0 */ // --> OFF
 /* eslint no-param-reassign: 0 */ // --> OFF
-
 const request = require('requisition');
 const queryString = require('query-string');
 
-const security_token = process.env.SECURITY_TOKEN;
 const apiUri = process.env.MANDATOABERTO_API_URL;
+const security_token = process.env.SECURITY_TOKEN_MA;
 
 module.exports = {
   async getPoliticianData(pageId) {
     const res = await request(`${apiUri}/api/chatbot/politician?fb_page_id=${pageId}&security_token=${security_token}`);
     const politicianData = await res.json();
+    // console.log('politicianData', politicianData);
     return politicianData;
   },
 
   async getPollData(pageId) {
     const res = await request(`${apiUri}/api/chatbot/poll?fb_page_id=${pageId}&security_token=${security_token}`);
     const pollData = await res.json();
+    // console.log('pollData', pollData);
     return pollData;
   },
 
-  async postRecipient(user_id, recipient) {
+  async postRecipientMA(user_id, recipient) {
     const recipientData_qs = queryString.stringify(recipient);
     const res = await request.post(`${apiUri}/api/chatbot/recipient?${recipientData_qs}&security_token=${security_token}&`).query({ politician_id: user_id });
     const recipientData = await res.json();
+    // console.log('recipientData', recipientData);
     return recipientData;
   },
 
@@ -57,6 +59,8 @@ module.exports = {
       entities = JSON.stringify(entities);
       const res = await request.post(`${apiUri}/api/chatbot/issue?politician_id=${politician_id}&fb_id=${fb_id}&message=${message}&entities=${entities}&security_token=${security_token}`);
       const issue = await res.json();
+      // console.log('postIssue', issue);
+
       return issue;
     }
 
@@ -68,41 +72,49 @@ module.exports = {
       message = encodeURI(message);
       const res = await request.post(`${apiUri}/api/chatbot/issue?politician_id=${politician_id}&fb_id=${fb_id}&message=${message}&security_token=${security_token}`);
       const issue = await res.json();
+      // console.log('postIssueWithoutEntities', issue);
+
       return issue;
     }
 
     return false;
   },
 
-  async getknowledgeBase(politician_id, entities) {
+  async getknowledgeBase(politician_id, entities, fb_id) {
     entities = JSON.stringify(entities);
-    const res = await request(`${apiUri}/api/chatbot/knowledge-base?politician_id=${politician_id}&entities=${entities}&security_token=${security_token}`);
+    const res = await request(`${apiUri}/api/chatbot/knowledge-base?politician_id=${politician_id}&entities=${entities}&fb_id=${fb_id}&security_token=${security_token}`);
     const knowledgeBase = await res.json();
+    // console.log('getknowledgeBase', knowledgeBase);
     return knowledgeBase;
   },
 
   async getknowledgeBaseByName(politician_id, entities) {
     const res = await request(`${apiUri}/api/chatbot/knowledge-base?politician_id=${politician_id}&entities=${entities}&security_token=${security_token}`);
     const knowledgeBase = await res.json();
+    // console.log('getknowledgeBaseByName', knowledgeBase);
+
     return knowledgeBase;
   },
 
   async postPrivateReply(item, page_id, post_id, comment_id, permalink, user_id) {
     const res = await request.post(`${apiUri}/api/chatbot/private-reply?page_id=${page_id}&item=${item}&post_id=${post_id}&comment_id=${comment_id}&permalink=${permalink}&user_id=${user_id}&security_token=${security_token}`);
     const privateReply = await res.json();
+    // console.log('postPrivateReply', privateReply);
     return privateReply;
   },
 
-  async updateBlacklist(fb_id, active) {
+  async updateBlacklistMA(fb_id, active) { // 0 -> turn off notification && 1 -> turn on notification
     const res = await request.post(`${apiUri}/api/chatbot/blacklist?fb_id=${fb_id}&active=${active}&security_token=${security_token}`);
     const Blacklist = await res.json();
     return Blacklist;
   },
+
   async getAvailableIntents(pageId, page) { // has pagination
     const res = await request(`${apiUri}/api/chatbot/intents/available?fb_page_id=${pageId}&page=${page}&security_token=${security_token}`);
     const intents = await res.json();
     return intents;
   },
+
   async getAllAvailableIntents(pageId) {
     const res = await request(`${apiUri}/api/chatbot/intents/available?fb_page_id=${pageId}&security_token=${security_token}`);
     const intents = await res.json();
@@ -122,7 +134,7 @@ module.exports = {
       },
     );
     const log = await res.json();
-    console.log('logFlowChange', log);
+    // // console.log('logFlowChange', log);
     return log;
   },
 
@@ -138,7 +150,7 @@ module.exports = {
       },
     );
     const log = await res.json();
-    console.log('logAnsweredPoll', log);
+    // // console.log('logAnsweredPoll', log);
     return log;
   },
 
@@ -154,7 +166,7 @@ module.exports = {
       },
     );
     const log = await res.json();
-    console.log('logAskedEntity', log);
+    // // console.log('logAskedEntity', log);
     return log;
   },
 
@@ -170,10 +182,11 @@ module.exports = {
       },
     );
     const log = await res.json();
-    console.log('logNotification', log);
+    // // console.log('logNotification', log);
     return log;
   },
 
+  // // console.log(await MaAPI.getLogAction()); // print possible log actions
   async getLogAction() {
     const res = await request(`${apiUri}/api/chatbot/log/actions?security_token=${security_token}`);
     const log = await res.json();
@@ -184,8 +197,7 @@ module.exports = {
     if (intent && intent.id) {
       const res = await request.post(`${apiUri}/api/chatbot/politician/${politician_id}/intents/${intent.id}/stats?entity_is_correct=${entity_is_correct}&recipient_fb_id=${recipient_fb_id}&security_token=${security_token}`);
       const log = await res.json();
-      console.log('setIntentStatus', log);
-
+      // // console.log('setIntentStatus', log);
       return log;
     }
     return false;

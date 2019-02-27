@@ -16,7 +16,7 @@ module.exports = async (context) => {
     // we reload politicianData on every useful event
     await context.setState({ politicianData: await MaAPI.getPoliticianData(context.event.rawEvent.recipient.id) });
     // we update context data at every interaction that's not a comment or a post
-    await MaAPI.postRecipient(context.state.politicianData.user_id, {
+    await MaAPI.postRecipientMA(context.state.politicianData.user_id, {
       fb_id: context.session.user.id,
       name: `${context.session.user.first_name} ${context.session.user.last_name}`,
       origin_dialog: 'greetings',
@@ -59,6 +59,16 @@ module.exports = async (context) => {
         break;
       case 'createIssueDirect':
         await createIssue(context);
+        break;
+      case 'notificationOn':
+        await MaAPI.updateBlacklistMA(context.session.user.id, 1);
+        await MaAPI.logNotification(context.session.user.id, context.state.politicianData.user_id, 3);
+        await context.sendText('Ligamos as notificações');
+        break;
+      case 'notificationOff':
+        await MaAPI.updateBlacklistMA(context.session.user.id, 0);
+        await MaAPI.logNotification(context.session.user.id, context.state.politicianData.user_id, 4);
+        await context.sendText('Desligamos as notificações');
         break;
     } // end switch case
   } catch (error) {

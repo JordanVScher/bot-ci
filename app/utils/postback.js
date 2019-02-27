@@ -4,6 +4,8 @@ const { MessengerClient } = require('messaging-api-messenger');
 const config = require('../bottender.config').messenger;
 const flow = require('./flow');
 
+console.log(config);
+
 const client = MessengerClient.connect({
   accessToken: config.accessToken,
   appSecret: config.appSecret,
@@ -62,4 +64,4 @@ async function createPersistentMenu() { // eslint-disable-line no-unused-vars
 // if there's an error just run it again
 // Run it => node util/postback.js
 createGetStarted();
-// createPersistentMenu();
+createPersistentMenu();
