@@ -19,7 +19,7 @@ async function createIssue(context) {
   const cleanString = await formatString(context.state.whatWasTyped);
   if (cleanString && cleanString.length > 0 && !blacklist.includes(cleanString)) {
     const issueResponse = await MaAPI.postIssue(context.state.politicianData.user_id, context.session.user.id, context.state.whatWasTyped,
-      context.state.resultParameters ? context.state.resultParameters : {}, context.state.politicianData.issue_active);
+      context.state.resultParameters, context.state.politicianData.issue_active);
 
     console.log('issueResponse', issueResponse);
 
