@@ -4,11 +4,11 @@ const { MessengerBot, FileSessionStore, withTyping } = require('bottender');
 const { createServer } = require('bottender/restify');
 
 const config = require('./bottender.config.js').messenger;
-const { getPoliticianData } = require('./chatbot_api');
+const { getPoliticianData } = require('./chatbot_api.js');
 
 const mapPageToAccessToken = async (pageId) => {
   const perfilData = await getPoliticianData(pageId);
-  return perfilData.fb_access_token;
+  return perfilData.fb_access_token ? perfilData.fb_access_token : config.accessToken;
 };
 
 const bot = new MessengerBot({

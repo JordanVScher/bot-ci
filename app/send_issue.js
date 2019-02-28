@@ -21,6 +21,8 @@ async function createIssue(context) {
     const issueResponse = await chatbotAPI.postIssue(context.state.politicianData.user_id, context.session.user.id, context.state.whatWasTyped,
       context.state.resultParameters ? context.state.resultParameters : {}, context.state.politicianData.issue_active);
 
+    console.log(context.state.politicianData);
+
     if (issueResponse && issueResponse.id) {
       await context.sendText(issueText.success);
       return true;
