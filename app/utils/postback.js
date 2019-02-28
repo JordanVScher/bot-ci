@@ -4,8 +4,6 @@ const { MessengerClient } = require('messaging-api-messenger');
 const config = require('../bottender.config').messenger;
 const flow = require('./flow');
 
-console.log(config);
-
 const client = MessengerClient.connect({
   accessToken: config.accessToken,
   appSecret: config.appSecret,
