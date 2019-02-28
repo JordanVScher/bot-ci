@@ -1,4 +1,4 @@
-const MaAPI = require('./mandatoaberto_api');
+const MaAPI = require('./chatbot_api');
 // const opt = require('./util/options');
 const { createIssue } = require('./send_issue');
 const { checkPosition } = require('./utils/dialogFlow');

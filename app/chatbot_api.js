@@ -10,14 +10,14 @@ module.exports = {
   async getPoliticianData(pageId) {
     const res = await request(`${apiUri}/api/chatbot/politician?fb_page_id=${pageId}&security_token=${security_token}`);
     const politicianData = await res.json();
-    console.log('politicianData', politicianData);
+    // console.log('politicianData', politicianData);
     return politicianData;
   },
 
   async getPollData(pageId) {
     const res = await request(`${apiUri}/api/chatbot/poll?fb_page_id=${pageId}&security_token=${security_token}`);
     const pollData = await res.json();
-    console.log('pollData', pollData);
+    // console.log('pollData', pollData);
     return pollData;
   },
 
@@ -25,7 +25,7 @@ module.exports = {
     const recipientData_qs = queryString.stringify(recipient);
     const res = await request.post(`${apiUri}/api/chatbot/recipient?${recipientData_qs}&security_token=${security_token}&`).query({ politician_id: user_id });
     const recipientData = await res.json();
-    console.log('recipientData', recipientData);
+    // console.log('recipientData', recipientData);
     return recipientData;
   },
 
@@ -59,7 +59,7 @@ module.exports = {
       entities = JSON.stringify(entities);
       const res = await request.post(`${apiUri}/api/chatbot/issue?politician_id=${politician_id}&fb_id=${fb_id}&message=${message}&entities=${entities}&security_token=${security_token}`);
       const issue = await res.json();
-      // console.log('postIssue', issue);
+      console.log('postIssue', issue);
 
       return issue;
     }

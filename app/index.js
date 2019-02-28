@@ -4,7 +4,7 @@ const { MessengerBot, FileSessionStore, withTyping } = require('bottender');
 const { createServer } = require('bottender/restify');
 
 const config = require('./bottender.config.js').messenger;
-const { getPoliticianData } = require('./mandatoaberto_api');
+const { getPoliticianData } = require('./chatbot_api');
 
 const mapPageToAccessToken = async (pageId) => {
   const perfilData = await getPoliticianData(pageId);
