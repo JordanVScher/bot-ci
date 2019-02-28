@@ -46,7 +46,11 @@ async function checkPosition(context) {
       break;
     default: // default acts for every intent - position on MA
       // getting knowledge base. We send the complete answer from dialogflow
-      await context.setState({ knowledge: await MaAPI.getknowledgeBase(context.state.politicianData.user_id, context.state.apiaiResp) });
+      await context.setState({
+        knowledge: await MaAPI.getknowledgeBase(
+          context.state.politicianData.user_id, context.state.apiaiResp, context.session.user.id,
+        ),
+      });
       console.log('knowledge', context.state.knowledge);
 
       // check if there's at least one answer in knowledge_base
