@@ -54,6 +54,12 @@ module.exports = {
   },
 
   async postIssue(politician_id, fb_id, message, entities, issue_active) {
+    console.log('politician_id', politician_id);
+    console.log('fb_id', fb_id);
+    console.log('message', message);
+    console.log('result', entities);
+    console.log('issue_active', issue_active);
+
     if (issue_active === 1 || issue_active === true) {
       message = encodeURI(message);
       entities = JSON.stringify(entities);
