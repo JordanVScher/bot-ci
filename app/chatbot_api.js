@@ -54,18 +54,12 @@ module.exports = {
   },
 
   async postIssue(politician_id, fb_id, message, entities, issue_active) {
-    console.log('politician_id', politician_id);
-    console.log('fb_id', fb_id);
-    console.log('message', message);
-    console.log('result', entities);
-    console.log('issue_active', issue_active);
-
     if (issue_active === 1 || issue_active === true) {
       message = encodeURI(message);
       entities = JSON.stringify(entities);
       const res = await request.post(`${apiUri}/api/chatbot/issue?politician_id=${politician_id}&fb_id=${fb_id}&message=${message}&entities=${entities}&security_token=${security_token}`);
       const issue = await res.json();
-      console.log('postIssue', issue);
+      // console.log('postIssue', issue);
       return issue;
     }
 
