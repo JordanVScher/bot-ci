@@ -1,5 +1,5 @@
 const MaAPI = require('./chatbot_api');
-// const opt = require('./util/options');
+const opt = require('./utils/options');
 const { createIssue } = require('./send_issue');
 const { checkPosition } = require('./utils/dialogFlow');
 const { apiai } = require('./utils/helper');
@@ -55,7 +55,10 @@ module.exports = async (context) => {
         await context.sendText(flow.greetings.text1);
         break;
       case 'mainMenu':
-        await context.sendText(flow.mainMenu.text1);
+        await context.sendText(flow.mainMenu.text1, opt.mainMenu);
+        break;
+      case 'agendar':
+        await context.sendText();
         break;
       case 'createIssueDirect':
         await createIssue(context);

@@ -8,8 +8,11 @@ module.exports = {
   mainMenu: {
     text1: 'No menu',
   },
+  agendar: {
+    text1: 'Acesse esse link e escolha a melhor data para você conversar com nossa equipe \n https://appcvico.youcanbook.me/',
+  },
   issueText: {
-    success: 'obg pela mensagem, já te respondo',
+    success: 'Desculpe, não entendi sua mensagem, mas já encaminhei a mensagem para nossa equipe e logo te responderemos =)',
     failure: 'Não consegui salvar sua msg, deu erro',
   },
 };
