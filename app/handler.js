@@ -53,6 +53,7 @@ module.exports = async (context) => {
     switch (context.state.dialog) {
       case 'greetings':
         await context.sendText(flow.greetings.text1);
+        await context.sendText(flow.mainMenu.text1, opt.mainMenu);
         break;
       case 'mainMenu':
         await context.sendText(flow.mainMenu.text1, opt.mainMenu);
