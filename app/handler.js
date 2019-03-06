@@ -59,7 +59,7 @@ module.exports = async (context) => {
         await context.sendText(flow.mainMenu.text1, { quick_replies: opt.mainMenu });
         break;
       case 'agendar':
-        await context.sendText();
+        await context.sendText(flow.agendar.text1);
         break;
       case 'createIssueDirect':
         await createIssue(context);
