@@ -201,4 +201,13 @@ module.exports = {
     }
     return false;
   },
+
+  async addNewUser(name, password, email, invite_token) {
+    const res = await request.post(`${apiUri}/api/register?security_token=${security_token}`).query({
+      name, password, email, // invite_token,
+    });
+    const log = await res.json();
+    console.log('addNewUser', log);
+    return log;
+  },
 };
