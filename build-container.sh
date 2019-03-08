@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t appcivico/mandatoaberto-chatbot .
+docker build -t appcivico/appcivico-test .
