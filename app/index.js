@@ -8,7 +8,15 @@ const { getPoliticianData } = require('./chatbot_api.js');
 
 const mapPageToAccessToken = async (pageId) => {
   const perfilData = await getPoliticianData(pageId);
-  return perfilData && perfilData.fb_access_token ? perfilData.fb_access_token : config.accessToken;
+  let token = 0;
+  if (perfilData && perfilData.fb_access_token && perfilData.fb_access_token.length > 0) {
+    token = perfilData.fb_access_token;
+  } else {
+    token = process.env.ACCESS_TOKEN;
+  }
+
+  console.log(token);
+  return token;
 };
 
 const bot = new MessengerBot({
