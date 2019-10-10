@@ -52,10 +52,11 @@ module.exports = async (context) => {
     }
     switch (context.state.dialog) {
       case 'greetings':
-        await context.sendText(flow.greetings.text1, { quick_replies: opt.mainMenu });
+        await help.sendMsgFromAssistente(context, 'greetings', [flow.greetings.text1]);
+        await context.sendText(flow.mainMenu.text1, { quick_replies: opt.mainMenu });
         break;
       case 'mainMenu':
-        await context.sendText(flow.greetings.text1, { quick_replies: opt.mainMenu });
+        await context.sendText(flow.mainMenu.text1, { quick_replies: opt.mainMenu });
         break;
       case 'agendar':
         await context.sendText(flow.agendar.text1);

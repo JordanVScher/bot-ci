@@ -2,8 +2,7 @@ module.exports = {
   avatarImage: 'https://www.telegraph.co.uk/content/dam/news/2016/09/08/107667228_beech-tree-NEWS_trans_NvBQzQNjv4BqplGOf-dgG3z4gg9owgQTXEmhb5tXCQRHAvHRWfzHzHk.jpg?imwidth=450',
   getStarted: 'oi sou o bot',
   greetings: {
-    text1: 'oi, eu sou o bot',
-    text2: 'faço isso e aquilo',
+    text1: 'oi, eu sou o bot, faço isso e aquilo',
   },
   mainMenu: {
     text1: 'No menu',
