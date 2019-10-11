@@ -15,7 +15,6 @@ const mapPageToAccessToken = async (pageId) => {
     token = process.env.ACCESS_TOKEN;
   }
 
-  console.log(token);
   return token;
 };
 
