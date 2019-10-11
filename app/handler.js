@@ -1,5 +1,4 @@
 const MaAPI = require('./chatbot_api');
-const opt = require('./utils/options');
 const { createIssue } = require('./send_issue');
 const { checkPosition } = require('./utils/dialogFlow');
 const { apiai } = require('./utils/helper');
@@ -52,14 +51,12 @@ module.exports = async (context) => {
     }
     switch (context.state.dialog) {
       case 'greetings':
+        await context.sendImage(flow.avatarImage);
         await help.sendMsgFromAssistente(context, 'greetings', [flow.greetings.text1]);
-        await context.sendText(flow.mainMenu.text1, { quick_replies: opt.mainMenu });
+        await context.sendText(flow.mainMenu.text1);
         break;
       case 'mainMenu':
-        await context.sendText(flow.mainMenu.text1, { quick_replies: opt.mainMenu });
-        break;
-      case 'agendar':
-        await context.sendText(flow.agendar.text1);
+        await context.sendText(flow.mainMenu.text1);
         break;
       case 'createIssueDirect':
         await createIssue(context);

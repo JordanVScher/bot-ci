@@ -1,17 +1,15 @@
 module.exports = {
-  avatarImage: 'https://www.telegraph.co.uk/content/dam/news/2016/09/08/107667228_beech-tree-NEWS_trans_NvBQzQNjv4BqplGOf-dgG3z4gg9owgQTXEmhb5tXCQRHAvHRWfzHzHk.jpg?imwidth=450',
+  avatarImage: 'https://gallery.mailchimp.com/926cb477483bcd8122304bc56/images/7abb5493-a395-4627-8b9e-ee5a4d6e9359.png',
   getStarted: 'oi sou o bot',
   greetings: {
-    text1: 'oi, eu sou o bot, faço isso e aquilo',
+    text1: 'Olá! Sou o bot de demonstração do Assistente Cívico. Fui criado para tirar duvidas sobre a plataforma. '
++ 'Para tirar duvidas é só me enviar mensagem, e saiba que quanto mais mensagens eu receber, mais eu aprendo e assim mais duvidas e posso tirar 😊',
   },
   mainMenu: {
-    text1: 'No menu',
-  },
-  agendar: {
-    text1: 'Acesse esse link e escolha a melhor data para você conversar com nossa equipe \nhttps://appcvico.youcanbook.me/',
+    text1: 'Posso te ajudar com algo?',
   },
   issueText: {
-    success: 'Desculpe, não entendi sua mensagem, mas já encaminhei a mensagem para nossa equipe e logo te responderemos =)',
-    failure: 'Não consegui salvar sua msg, deu erro',
+    success: 'Eu sou um robô e estou aprendendo! Não entendi sua mensagem.',
+    failure: 'Eu sou um robô e estou aprendendo! Não entendi sua mensagem',
   },
 };
