@@ -1,7 +1,7 @@
 const MaAPI = require('./chatbot_api');
 const { createIssue } = require('./send_issue');
-const { checkPosition } = require('./utils/dialogFlow');
-const { apiai } = require('./utils/helper');
+
+const DF = require('./utils/dialogFlow');
 const flow = require('./utils/flow');
 const help = require('./utils/helper');
 
@@ -33,22 +33,9 @@ module.exports = async (context) => {
       await MaAPI.logFlowChange(context.session.user.id, context.state.politicianData.user_id,
         context.event.message.quick_reply.payload, context.event.message.quick_reply.payload);
     } else if (context.event.isText) {
-      await context.setState({ whatWasTyped: context.event.message.text });
-      if (context.state.politicianData.use_dialogflow === 1) { // check if 'politician' is using dialogFlow
-        if (context.state.whatWasTyped.length <= 255) { // check if message is short enough for apiai
-          await context.setState({ toSend: context.state.whatWasTyped });
-        } else { // cutting chars
-          await context.setState({ toSend: context.state.whatWasTyped.slice(0, 255) });
-        }
-        await context.setState({ apiaiResp: await apiai.textRequest(context.state.toSend, { sessionId: context.session.user.id }) });
-        await context.setState({ resultParameters: context.state.apiaiResp.result.parameters }); // getting the entities
-        await context.setState({ intentName: context.state.apiaiResp.result.metadata.intentName }); // getting the intent
-        await checkPosition(context);
-      } else { // not using dialogFlow
-        await context.setState({ dialog: 'createIssueDirect' });
-      }
-      // await createIssue(context, 'Não entendi sua mensagem pois ela é muito complexa. Você pode escrever novamente, de forma mais direta?');
+      await DF.dialogFlow(context);
     }
+
     switch (context.state.dialog) {
       case 'greetings':
         await context.sendImage(flow.avatarImage);

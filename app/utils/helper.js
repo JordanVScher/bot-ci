@@ -1,5 +1,4 @@
 const Sentry = require('@sentry/node');
-const dialogFlow = require('apiai-promise');
 
 // Sentry - error reporting
 Sentry.init({
@@ -25,7 +24,7 @@ async function sendMsgFromAssistente(context, code, defaultMsgs) {
     let msgToSend;
 
     if (answers && answers.length > 0) {
-      const currentMsg = answers.find((x) => x.code === code);
+      const currentMsg = answers.find(x => x.code === code);
       if (currentMsg && currentMsg.content) msgToSend = currentMsg.content;
     }
 
@@ -42,5 +41,5 @@ async function sendMsgFromAssistente(context, code, defaultMsgs) {
 }
 
 module.exports = {
-  sentryError, sendMsgFromAssistente, waitTypingEffect, Sentry, apiai: dialogFlow(process.env.DIALOGFLOW_TOKEN),
+  sentryError, sendMsgFromAssistente, waitTypingEffect, Sentry,
 };

@@ -85,3 +85,5 @@ google-secret-key.json
 
 # for random testing
 test.js
+
+google_private_key.json
